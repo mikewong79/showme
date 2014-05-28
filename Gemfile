@@ -33,7 +33,7 @@ group :doc do
 end
 
 
-group :test do
+group :test, :development do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end

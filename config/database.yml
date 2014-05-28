@@ -19,8 +19,8 @@ development:
   encoding: unicode
   database: showme_development
   pool: 5
-  username:
-  password:
+  username: 
+  password: 
   host: localhost
   port: 5432
 
@@ -50,13 +50,17 @@ test:
   encoding: unicode
   database: showme_test
   pool: 5
-  username:
-  password:
+  username: 
+  password: 
+  host: localhost
+  port: 5432
 
 production:
   adapter: postgresql
   encoding: unicode
   database: showme_production
   pool: 5
-  username:
-  password:
+  username: 
+  password: 
+  host: localhost
+  port: 5432
