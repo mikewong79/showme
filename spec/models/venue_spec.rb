@@ -19,5 +19,11 @@ describe Venue do
 		it {should allow_value("723-237-9088","301-867-5309","210-576-6542").for(:phone)}
   		it {should_not allow_value("1234567890","123-fed-1234","123-324-345").for(:phone)}
   	end
-  	
+  	describe "website link should be valid url" do
+  		it {should allow_value("http://foo.com", "http://bar.com/baz").for(:website)}
+  		it {should_not allow_value("sfsdfsdfsd", "123123").for(:website)}
+  	end
+  	describe "should belong to an owner" do
+  		it {should belong_to(:owner)}
+  	end
 end
