@@ -15,4 +15,7 @@ describe Owner do
   		it {should allow_value("KrisCoulson@gmail.com","Shane@shane.com","Ryan@ryan.net").for(:email)}
   		it {should_not allow_value("dasjdkj","asdasdas.com","hol5@").for(:email)}
   	end
+    describe "Owner has many venues" do
+      it {should have_many(:venues)}
+    end
 end
