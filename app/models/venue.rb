@@ -1,5 +1,6 @@
 class Venue < ActiveRecord::Base
   belongs_to :owner
+  has_many :performances
 
   validates_presence_of :name
   validates_presence_of :street_address_1

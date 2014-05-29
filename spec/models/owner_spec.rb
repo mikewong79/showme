@@ -1,11 +1,9 @@
 require 'spec_helper'
 
-
-
 describe Owner do
-	
+
 	describe "Validate all fields in Owner Model" do
- 		
+
  		it {should validate_presence_of(:first_name)}
   		it {should validate_presence_of(:last_name)}
   		it {should validate_presence_of(:email)}
