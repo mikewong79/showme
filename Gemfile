@@ -8,6 +8,7 @@ gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
+gem 'foundation-rails'
 gem 'gmaps4rails'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -27,6 +28,9 @@ gem 'jquery-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+# Devise gem four authentication
+gem 'devise'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -1,0 +1,8 @@
+<%= form_for @performance do |f| %>
+  Name: <%= f.text_field :name %><br />
+  Date: <%= f.text_field :date %></br>
+  Time: <%= f.text_field :time %><br />
+  Description: <%= f.text_field :description %></br>
+  <br />
+  <%= f.submit %>
+<% end %>
