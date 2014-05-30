@@ -1,0 +1,14 @@
+<%= form_for @venue do |f| %>
+  Name: <%= f.text_field :name %><br />
+  Street address: <%= f.text_field :street_address_1 %></br>
+  city: <%= f.text_field :city %>
+  State: <%= f.text_field :state %><br />
+  Zip: <%= f.text_field :zip %></br>
+  Website: <%= f.text_field :website %>
+  Phone: <%= f.text_field :phone %>
+  Ticket Link: <%= f.text_field :ticket_link %><br />
+  Photo: <%= f.text_field :photo %></br>
+
+  <br />
+  <%= f.submit %>
+<% end %>
