@@ -12,12 +12,12 @@
   </head>
 
   <body>
-  
+
     <!-- <div class="contain-to-grid sticky"> -->
       <nav class="top-bar" data-topbar data-options="sticky_on: large">
       <ul class="title-area">
         <li class="name">
-          <h1><a href="#">ShowMe</a></h1>
+          <h1><%= link_to('ShowMe', root_path ) %></h1>
         </li>
          <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -26,8 +26,14 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
-            <li class="active"><a href="#">SIGNUP</a></li>
-            <li class="active"><a href="#">LOGIN</a></li>
+            <% if !signed_in? %>
+              <li class="active"><a href="/owners/sign_up">SIGNUP</a></li>
+              <li class="active"><a href="/owners/sign_in">LOGIN</a></li>
+            <% else %>
+              <li class="active"><%= link_to('Logout', destroy_owner_session_path, :method => :delete) %></li>
+
+            <% end %>
+
             <li class="has-dropdown">
               <a href="#">Navigation</a>
               <ul class="dropdown">
@@ -38,7 +44,7 @@
               </ul>
             </li>
           </ul>
-    
+
           <!-- Left Nav Section -->
     <!-- <ul class="left">
             <li><a href="#">Left Nav Button</a></li>

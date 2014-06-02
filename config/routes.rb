@@ -1,15 +1,17 @@
 Showme::Application.routes.draw do
   devise_for :owners
-  resources :owners
-  resources :venues
+  resources :owners do
+    resources :venues, shallow: true
+  end
   resources :performances
   resources :artists
+  get 'venues/' => 'venues#map', as: :venues
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'venues#index'
+  root 'venues#map'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
