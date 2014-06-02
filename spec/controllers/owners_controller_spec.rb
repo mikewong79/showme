@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe OwnersController do
-  let(:valid_attributes) { { :first_name => "Joe", :last_name => "VenueOwner", :email => "venue@venue.com" } }
+  let(:valid_attributes) { { :first_name => "Joe", :last_name => "VenueOwner", :email => "venue@venue.com", :password => "password1"} }
 
   describe "GET index" do
 
@@ -12,7 +12,7 @@ describe OwnersController do
 
     it "@owners should contain all the owners" do
       owner = Owner.create! valid_attributes
-      owner2 = Owner.create!(:first_name => "Joe", :last_name => "VenueOwner", :email => "different@venue.com" )
+      owner2 = Owner.create!(:first_name => "Joe", :last_name => "VenueOwner", :email => "different@venue.com", :password => "password1" )
       get :index
       expect(assigns(:owners)).to include(owner)
       expect(assigns(:owners)).to include(owner2)
