@@ -1,7 +1,8 @@
 Showme::Application.routes.draw do
   devise_for :owners
-  resources :venues
-  resources :performances
+  resources :venues do
+    resources :performances, shallow: true
+  end
   resources :artists
   get 'venues/' => 'venues#map', as: :map
 

@@ -38,8 +38,8 @@
               <a href="#">Navigation</a>
               <ul class="dropdown">
                 <li><a href="#"><%= link_to 'Add a Venue', new_venue_path %></a></li>
-                <li><a href="#"><%= link_to 'Root Path', root_path %></a></li>
-                <li><a href="#"><%= link_to 'Performance index', performances_path %></a></li>
+                <li><a href="#"><%= link_to 'See Your Venues', venues_path %></a></li>
+                <li><a href="#"><%= link_to 'Root', root_path %></a></li>
                 <li><a href="#"><%= link_to 'Venues index', venues_path %></a></li>
               </ul>
             </li>
@@ -55,9 +55,9 @@
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
+ <%= javascript_include_tag "application" %>
     <%= yield %>
-    <%= javascript_include_tag "application" %>
+
   </body>
 </html>
 
