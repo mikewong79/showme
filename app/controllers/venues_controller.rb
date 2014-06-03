@@ -31,7 +31,7 @@ class VenuesController < ApplicationController
   end
 
   def venue_params
-    params.require(:venue).permit(:name, :street_address_1, :city, :state, :zip, :phone, :website)
+    params.require(:venue).permit(:name, :street_address_1, :city, :state, :zip, :phone, :website, :photo)
   end
 
   # def delete

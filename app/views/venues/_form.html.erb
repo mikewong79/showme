@@ -1,4 +1,5 @@
 <%= form_for @venue do |f| %>
+  <%= f.file_field :photo %>
   Name: <%= f.text_field :name %><br />
   Street address: <%= f.text_field :street_address_1 %></br>
   city: <%= f.text_field :city %>
@@ -7,7 +8,7 @@
   Website: <%= f.text_field :website %>
   Phone: <%= f.text_field :phone %>
   Ticket Link: <%= f.text_field :ticket_link %><br />
-  Photo: <%= f.text_field :photo %></br>
+  
 
   <br />
   <%= f.submit %>
