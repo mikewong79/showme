@@ -1,5 +1,7 @@
 <%= form_for @venue do |f| %>
+
   <%= f.hidden_field :owner_id, value: current_owner.id %>
+  <%= f.file_field :photo %>
   Name: <%= f.text_field :name %><br />
   Street address: <%= f.text_field :street_address_1 %></br>
   city: <%= f.text_field :city %>
