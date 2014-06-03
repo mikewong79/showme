@@ -10,15 +10,17 @@ class PerformancesController < ApplicationController
 
   def new
     @performance = Performance.new
+    @venue = Venue.find(params[:venue_id])
+    @artists = Artist.all
   end
 
   def edit
   end
 
   def create
-    @performance=Performance.new(performance_params)
+    @performance = Performance.new(performance_params)
     if @performance.save
-      redirect_to performances_path
+      redirect_to root_path
     else
       render :new
     end
@@ -30,7 +32,7 @@ class PerformancesController < ApplicationController
   end
 
   def performance_params
-    params.require(:performance).permit(:date, :time)
+    params.require(:performance).permit(:name, :date, :time, :artists, :description, :venue_id)
   end
 
 end

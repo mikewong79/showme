@@ -1,7 +1,10 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only:[:show, :edit, :update, :destroy]
-  def index
+  def map
     @venues = Venue.all
+  end
+  def index
+    @venues = current_owner.venues
   end
 
   def show
@@ -31,7 +34,7 @@ class VenuesController < ApplicationController
   end
 
   def venue_params
-    params.require(:venue).permit(:name, :street_address_1, :city, :state, :zip, :phone, :website, :photo)
+    params.require(:venue).permit(:name, :street_address_1, :city, :state, :zip, :phone, :website, :owner_id, :photo)
   end
 
   # def delete
@@ -40,5 +43,5 @@ class VenuesController < ApplicationController
   # def update
   # end
 
-  
+
 end

@@ -1,7 +1,9 @@
-<%= form_for @performance do |f| %>
+<%= form_for [@venue, @performance] do |f| %>
+  <%= f.hidden_field :venue_id, value: @venue.id %>
   Name: <%= f.text_field :name %><br />
-  Date: <%= f.text_field :date %></br>
-  Time: <%= f.text_field :time %><br />
+  Date: <%= f.date_field :date %></br>
+  Time: <%= f.time_field :time %><br />
+  Performers: <%= f.collection_check_boxes :artists, @artists, :id, :name, :include_blank => true %>
   Description: <%= f.text_field :description %></br>
   <br />
   <%= f.submit %>
