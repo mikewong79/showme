@@ -1,11 +1,9 @@
 Showme::Application.routes.draw do
   devise_for :owners
-  resources :owners do
-    resources :venues, shallow: true
-  end
+  resources :venues
   resources :performances
   resources :artists
-  get 'venues/' => 'venues#map', as: :venues
+  get 'venues/' => 'venues#map', as: :map
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

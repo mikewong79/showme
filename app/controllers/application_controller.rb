@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :first_name
     devise_parameter_sanitizer.for(:sign_up) << :last_name
   end
+
+  def after_sign_in_path_for(resource)
+    venues_path #your path
+  end
 end
