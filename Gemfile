@@ -6,6 +6,10 @@ gem 'rails', '4.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+
+# Use PaperClip for uploading Photos!
+gem 'aws-sdk'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 gem 'foundation-rails'
