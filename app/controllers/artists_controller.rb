@@ -5,7 +5,7 @@ class ArtistsController < ApplicationController
   end
 
   def show
-  	
+
   end
 
   def new
@@ -13,7 +13,7 @@ class ArtistsController < ApplicationController
   end
 
   def edit
-  	
+
   end
 
   def create
@@ -24,6 +24,13 @@ class ArtistsController < ApplicationController
       render :new
     end
   end
+
+  def update
+  end
+
+  def destroy
+  end
+
 
   protected
 

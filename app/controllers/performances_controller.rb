@@ -27,6 +27,21 @@ class PerformancesController < ApplicationController
       render :new
     end
   end
+
+  def update
+    if @performance.update(performance_params)
+      redirect_to venue_path(@performance.venue)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    venue = @performance.venue
+    @performance.destroy
+    redirect_to venue_path(venue)
+  end
+
   protected
 
   def set_performance
