@@ -1,4 +1,7 @@
 class VenuesController < ApplicationController
+  
+  
+  
   before_action :set_venue, only:[:show, :edit, :update, :destroy]
   def map
     @venues = Venue.all
@@ -19,6 +22,7 @@ class VenuesController < ApplicationController
     if @venue.save
       redirect_to venues_path
     else
+      raise @venue.errors.inspect
       render :new
     end
   end
