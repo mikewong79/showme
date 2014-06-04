@@ -1,3 +1,28 @@
 // Place all the styles related to the venues controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body { 
+	width: 100%;
+	height: 100%;
+	margin:0px;
+	padding:0px;
+ }
+
+ #map-container {
+	position:absolute; 
+	width:auto; 
+	height: auto;
+	top:60px;
+	left:0;
+	right:0;
+	bottom:0;
+	img {
+		max-width: none;
+	}
+ }
+
+ #map {
+ 	height:100%;
+ 	width:100%;
+ }
