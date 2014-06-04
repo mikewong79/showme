@@ -1,0 +1,8 @@
+<%= @performance.name %><br/>
+<%= @performance.date %>  <%= @performance.time %><br/>
+<% @performance.artists.each do |a| %>
+  <%= a.name %> <br/>
+<%end%>
+<%= link_to "Edit This Performance", edit_performance_path %>
+<%= link_to @performance.venue.name, venue_path(@performance.venue) %>
+

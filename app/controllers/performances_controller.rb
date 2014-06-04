@@ -15,12 +15,14 @@ class PerformancesController < ApplicationController
   end
 
   def edit
+    @venue = @performance.venue
+    @artists = Artist.all
   end
 
   def create
     @performance = Performance.new(performance_params)
     if @performance.save
-      redirect_to root_path
+      redirect_to venue_path(params[:venue_id])
     else
       render :new
     end
@@ -32,7 +34,7 @@ class PerformancesController < ApplicationController
   end
 
   def performance_params
-    params.require(:performance).permit(:name, :date, :time, :artists, :description, :venue_id)
+    params.require(:performance).permit(:name, :date, :time, :description, :venue_id, :artist_ids => [])
   end
 
 end

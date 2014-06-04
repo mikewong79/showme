@@ -19,6 +19,7 @@ class VenuesController < ApplicationController
     if @venue.save
       redirect_to venues_path
     else
+      raise @venue.errors.inspect
       render :new
     end
   end
