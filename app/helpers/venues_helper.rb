@@ -1,6 +1,7 @@
 module VenuesHelper
 	def us_states
-	[
+	[		
+		["State", "State"],
 	    ['AK', 'AK'],
 	    ['AL', 'AL'],
 	    ['AR', 'AR'],
