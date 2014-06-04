@@ -2,12 +2,32 @@
 <p>Find me in app/views/venues/show.html.erb</p>
 
 <div class="row">
-	<div class="small-4 columns">Venue Photo Div</div>
-	<div class="small-8 columns">Venue Info Div</div>
+	<div class="small-4 columns">
+    Venue Photo Div
+    <%= image_tag source=@venue.photo %>
+  </div>
+	<div class="small-8 columns">
+  <%= @venue.name %><br />
+  <%= @venue.street_address_1 %><br />
+  <%= @venue.city %>, <%= @venue.state %> <%= @venue.zip %>
+  </div>
+
 </div>
 <div class="row">
-	<div class="small-12 columns">Upcomming Events</div>
+	<div class="small-12 columns">
+    Upcoming Events<br/>
+    <% @venue.performances.each do |p| %>
+    <%= link_to p.name, performance_path(p) %><br/>
+    <%= p.date %>@<%=p.time%><br/>
+
+      <% p.artists.each do |a| %>
+      <%= a.name %><br/>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 <div class="row">
 	<div class="small-12 columns">PLAYLIST</div>
 </div>
+<%= link_to 'Add a performance', new_venue_performance_path(params[:id]) %>
+<%= link_to 'Edit This Venue', edit_venue_path(params[:id]) %>
