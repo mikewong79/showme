@@ -3,7 +3,8 @@
   Name: <%= f.text_field :name %><br />
   Date: <%= f.date_field :date %></br>
   Time: <%= f.time_field :time %><br />
-  Performers: <%= f.collection_check_boxes :artists, @artists, :id, :name, :include_blank => true %>
+  Performers: <%= f.collection_check_boxes :artist_ids, @artists, :id, :name, :include_blank => true %><br/>
+  <%= link_to 'Add an artist', new_artist_path %><br/>
   Description: <%= f.text_field :description %></br>
   <br />
   <%= f.submit %>
