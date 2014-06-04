@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Showme::Application.config.secret_key_base = 'a579c18182ed52e252d9778eec19ce75a26d8f8922ca47ca99e9610193aba8f450410130982f89d2e0f0e0c0b6f22c95ae94f7097f58d4cdd3a550746cf49bbf'
+Showme::Application.config.secret_key_base = ENV['SHOWME_KEY_BASE']
