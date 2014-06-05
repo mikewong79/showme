@@ -1,7 +1,10 @@
-<%= form_for @owner do |f| %>
-  First name: <%= f.text_field :first_name %><br />
-  Last Name: <%= f.text_field :last_name %></br>
-  Email: <%= f.text_field :email %>
-  <br />
-  <%= f.submit %>
-<% end %>
+<div class="large-6 columns large-centered black">
+	<%= form_for @owner do |f| %>
+		
+		<%= f.text_field :first_name, placeholder: "First Name" %>
+		<%= f.text_field :last_name, placeholder: "Last Name" %>
+		<%= f.text_field :email, placeholder: "Email"  %>
+
+	  <%= f.submit %>
+	<% end %>
+</div>
