@@ -6,6 +6,9 @@ gem 'rails', '4.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+#HEROKU SHITSHOW DEPLOY
+gem 'rails_12factor'
+
 
 # Use PaperClip for uploading Photos!
 gem 'aws-sdk'
