@@ -4,3 +4,14 @@
 <p><%=link_to v.name, venue_path(v) %><%= link_to 'Add a performance', new_venue_performance_path(v) %> </p>
 <%end%>
 <%= link_to 'Add your venue', new_venue_path %> </p>
+
+
+<div x-ng-app="songkick-app">
+	<div x-ng-controller="venueCtrl">
+		{{metroAreaId}}
+	</div>
+	<div x-ng-controller="calendarCtrl">
+		test
+	</div>
+</div>
+

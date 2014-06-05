@@ -1,0 +1,8 @@
+songKickApp.factory('calendar', ['$http', function($http) {
+   Calendar = {
+   	 forMetroArea: function(metroAreaId) {
+   	    return $http({method: 'GET', url: 'http://api.songkick.com/api/3.0/metro_areas/'+metroAreaId+'/calendar.json?apikey=Phaj1PyBhlWJiN94'});
+   	 }
+   }
+  return Calendar;
+}])

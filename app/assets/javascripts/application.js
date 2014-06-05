@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require underscore
 //= require foundation
+//= require angular
+//= require angular-resource
 //= require gmaps/google
 //= require_tree .
 
