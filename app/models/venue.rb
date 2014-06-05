@@ -5,12 +5,12 @@ class Venue < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
   validates_presence_of :name
-  validates_presence_of :street_address_1
-  validates_presence_of :city
-  validates_presence_of :zip
-  validates_presence_of :phone
-  validates_length_of :zip, is: 5
-  validates :phone, format: { with: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/, message: "bad format" }
-  validates :website, format: { with: /^((http|https):\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+).[a-z]{2,5}(:[0-9]{1,5})?(\/.)?$/ix,  :multiline => true }, :allow_blank => true
+  # validates_presence_of :street_address_1
+  # validates_presence_of :city
+  # validates_presence_of :zip
+  # validates_presence_of :phone
+  # validates_length_of :zip, is: 5
+  # validates :phone, format: { with: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/, message: "bad format" }
+  # validates :website, format: { with: /^((http|https):\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+).[a-z]{2,5}(:[0-9]{1,5})?(\/.)?$/ix,  :multiline => true }, :allow_blank => true
 
 end
