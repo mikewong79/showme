@@ -26,10 +26,13 @@ songKickApp.controller('venueCtrl', ['venue', 'calendar', '$scope', function(ven
     var i;
     $scope.venueNames = [];
     $scope.artistNames = [];
+    $scope.latitude = [];
 
     for (i = 0; i < data.resultsPage.results.event.length; i++) {
       $scope.venueNames.push(data.resultsPage.results.event[i].venue.displayName);
-      $scope.artistNames.push(data.resultsPage.results.event[i].performance[0].artist.displayName)
+      $scope.artistNames.push(data.resultsPage.results.event[i].performance[0].artist.displayName);
+      // $scope.latitude.push(data.resultsPage.results.event[i].location.lat);
+      // console.log(latitude);
 
     }
     })
