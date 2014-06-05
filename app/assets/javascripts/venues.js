@@ -21,6 +21,17 @@ songKickApp.controller('venueCtrl', ['venue', 'calendar', '$scope', function(ven
     $scope.metroAreaId = data.resultsPage.results.location[0].metroArea.id;
     calendar.forMetroArea($scope.metroAreaId).success(function(data, status, headers, config) {
     	console.log(data)
+    $scope.displayNameOne = data.resultsPage.results.event[0].performance[0].artist.displayName
+    $scope.venueNameOne = data.resultsPage.results.event[0].venue.displayName
+    var i;
+    $scope.venueNames = [];
+    $scope.artistNames = [];
+
+    for (i = 0; i < data.resultsPage.results.event.length; i++) {
+      $scope.venueNames.push(data.resultsPage.results.event[i].venue.displayName);
+      $scope.artistNames.push(data.resultsPage.results.event[i].performance[0].artist.displayName)
+
+    }
     })
   });
 }])
@@ -38,7 +49,7 @@ songKickApp.controller('calendarCtrl', ['calendar', '$scope', function(calendar,
   $scope.calendar= [];
 
   calendar.success(function(data, status, headers, config) {
-  	console.log(data);
+  	console.log(data); 
 
     
   });
