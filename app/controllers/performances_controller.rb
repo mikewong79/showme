@@ -49,7 +49,7 @@ class PerformancesController < ApplicationController
   end
 
   def performance_params
-    params.require(:performance).permit(:name, :date, :time, :description, :venue_id, :artist_ids => [])
+    params.require(:performance).permit(:name, :date, :time, :description, :venue_id, :songkick_id, :artist_ids => [])
   end
 
 end

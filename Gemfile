@@ -6,14 +6,18 @@ gem 'rails', '4.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-#HEROKU SHITSHOW DEPLOY
+# Heroku deploy
 gem 'rails_12factor'
+
+# Used in rake task
+gem 'httparty'
 
 
 # Use PaperClip for uploading Photos!
 gem 'aws-sdk'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-# Use SCSS for stylesheets
+
+# Use SCSS and foundation for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 gem 'foundation-rails'
 
@@ -44,7 +48,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-
+# Use rpsec and shoulda for TDD
 group :test, :development do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
