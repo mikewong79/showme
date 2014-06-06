@@ -1,30 +1,33 @@
 
 <div class=" large-4 small-10 small-centered columns large-centered black">
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
- <div class="row black-bg">
- <h3 class="headline">WELCOME</h3>
-  <div class="large-12 columns">
-  	<%= f.email_field :email, autofocus: true %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row black-bg">
+      <h3 class="headline">WELCOME</h3>
+      <div class="large-12 columns">
+        <%= f.email_field :email, autofocus: true %>
+      </div>
 
-  <div class="large-12 columns">
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+      <div class="large-12 columns">
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="headline">
-    	<%= f.check_box :remember_me%> <%= f.label :remember_me, class: "headline" %>
+      <% if devise_mapping.rememberable? -%>
+        <div class="headline">
+          <%= f.check_box :remember_me%> <%= f.label :remember_me, class: "headline" %>
+        </div>
+        <div class="large-12 columns">
+        <%= render "devise/shared/links" %>
+        </div>
+      <% end %>
+
+      <div class="large-12 columns">
+      <%= f.submit "Sign in", class: "button-2"%>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="large-12 columns">
-  	<%= f.submit "Sign in", class: "button-2"%>
-  </div>
-  <div class="large-12 columns">
-  <%= render "devise/shared/links" %>
-  </div>
-</div>
-<% end %>
+  <% end %>
 
 </div>
+
+
+
 
