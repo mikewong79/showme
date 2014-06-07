@@ -1,11 +1,14 @@
 class ArtistsController < ApplicationController
  before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  respond_to :json, :html
+
   def index
     @artists = Artist.all
+    respond_with @artists
   end
 
   def show
-
+    respond_with @artist
   end
 
   def new
@@ -19,9 +22,15 @@ class ArtistsController < ApplicationController
   def create
     @artist = Artist.new(artist_params)
     if @artist.save
-      redirect_to artists_path
+      respond_to do |format|
+        format.html {redirect_to artists_path(params[:venue_id])}
+        format.json {render json: @artist, status: :created}
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html {render :new}
+        format.json {render json: @artist.errors, status: :unprocessable_entity}
+      end
     end
   end
 
