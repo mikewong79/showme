@@ -8,8 +8,15 @@ class VenuesController < ApplicationController
   end
 
   def index
+
     @venues = Venue.all
     respond_with @venues
+    if signed_in?
+      @venues = current_owner.venues
+    else
+      redirect_to new_owner_session_path
+    end
+
   end
 
   def show
@@ -17,7 +24,12 @@ class VenuesController < ApplicationController
   end
 
   def new
-    @venue = Venue.new
+    if signed_in?
+      @venue = Venue.new
+    else
+      redirect_to new_owner_session_path
+    end
+
   end
 
   def create
