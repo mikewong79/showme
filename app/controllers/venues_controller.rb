@@ -1,16 +1,19 @@
 class VenuesController < ApplicationController
 
   before_action :set_venue, only:[:show, :edit, :update, :destroy]
+  respond_to :json, :html
 
   def map
-    @venues = Venue.all
-  end
-
-  def index
     @venues = current_owner.venues
   end
 
+  def index
+    @venues = Venue.all
+    respond_with @venues
+  end
+
   def show
+    respond_with @venue
   end
 
   def new
@@ -20,9 +23,15 @@ class VenuesController < ApplicationController
   def create
     @venue = Venue.new(venue_params)
     if @venue.save
-      redirect_to venues_path
+      respond_to do |format|
+      format.html {redirect_to venues_path}
+      format.json {render json: @venue, status: :created}
+      end
     else
-      render :new
+      respond_to do |format|
+      format.html {render :new}
+      format.json {render json: @venue.errors, status: :unprocessable_entity}
+      end
     end
   end
 
@@ -31,15 +40,20 @@ class VenuesController < ApplicationController
 
   def update
     if @venue.update(venue_params)
-      redirect_to venues_path
+        respond_to do |format|
+        format.html {redirect_to venues_path}
+        format.json {render nothing: true, status: :no_content}
+      end
     else
-      render :edit
+      format.html { render :edit}
+      format.json { render json: @venue.errors, status: :unprocessable_entity}
     end
   end
 
   def destroy
     @venue.destroy
-    redirect_to venues_path
+    format.html { redirect_to venues_path }
+    format.json { render json: { head: ok } }
   end
 
 
