@@ -95,7 +95,7 @@ namespace :songkick do
   desc "Add rdio_id to recently created artits."
   task new_rdio_id: :environment do
     # Find all artists that created in the past hour
-    new_artists = Artist.where("created_at > ?", Time.now-3600)
+    new_artists = Artist.where("created_at > ?", Time.now-3600).limit(100)
     new_artists.each do |new_artist|
         response = HTTParty.get('http://developer.echonest.com/api/v4/artist/profile?api_key=' + ENV['ECHONEST_API_KEY'] + '&format=json&id=songkick:artist:' + new_artist.songkick_id.to_s + '&bucket=id:rdio-US')
         rdio_response=JSON.parse(response.body)
