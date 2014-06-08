@@ -95,17 +95,26 @@ namespace :songkick do
   desc "Add rdio_id to recently created artits."
   task new_rdio_id: :environment do
     # Find all artists that created in the past hour
-    new_artists = Artist.where("created_at > ?", Time.now-3600)
-    new_artists.each do |new_artist|
-        response = HTTParty.get('http://developer.echonest.com/api/v4/artist/profile?api_key=' + ENV['ECHONEST_API_KEY'] + '&format=json&id=songkick:artist:' + new_artist.songkick_id.to_s + '&bucket=id:rdio-US')
-        rdio_response=JSON.parse(response.body)
-        # Check to see if there actually is a rdio_id associated with the artist.
-        if rdio_response["response"]["artist"]
-            # If there is, add it to the database.
-            new_artist.update!(rdio_id: rdio_response["response"]["artist"]["id"])
+    # new_artists = Artist.where("created_at > ?", Time.now-3600)
+    non_updated_artists = Artist.where("updated_at < ?", Time.now-38800).limit(300)
+    non_updated_artists.each do |new_artist|
+        if !new_artist.rdio_id
+            response = HTTParty.get('http://developer.echonest.com/api/v4/artist/profile?api_key=' + ENV['ECHONEST_API_KEY'] + '&format=json&id=songkick:artist:' + new_artist.songkick_id.to_s + '&bucket=id:rdio-US')
+            rdio_response=JSON.parse(response.body)
+
+            # Check to see if there actually is a rdio_id associated with the artist.
+            if rdio_response["response"]["artist"] && rdio_response["response"]["artist"]["foreign_ids"]
+                    # If there is, add it to the database.
+                    puts rdio_response["response"]["artist"]["foreign_ids"][0]["foreign_id"].gsub('rdio-US:artist:','')
+                    new_artist.update!(rdio_id: rdio_response["response"]["artist"]["foreign_ids"][0]["foreign_id"].gsub('rdio-US:artist:',''))
+            else
+                new_artist.update!(rdio_id: "done")
+            end
+            # # Ensure that we don't hit our API rate limit, 20 calls per minute max.
+            sleep(4)
+        else
+            puts "rdio id exists"
         end
-        # Ensure that we don't hit our API rate limit, 20 calls per minute max.
-        sleep(4)
     end
   end
 
@@ -117,9 +126,12 @@ namespace :songkick do
         response = HTTParty.get('http://developer.echonest.com/api/v4/artist/profile?api_key=' + ENV['ECHONEST_API_KEY'] + '&format=json&id=songkick:artist:' + artist.songkick_id.to_s + '&bucket=id:rdio-US')
         rdio_response=JSON.parse(response.body)
         # Check to see if there actually is a rdio_id associated with the artist.
-        if rdio_response["response"]["artist"]
+        if rdio_response["response"]["artist"] && rdio_response["response"]["artist"]["foreign_ids"]
             # If there is, add it to the database.
-            artist.update!(rdio_id: rdio_response["response"]["artist"]["id"])
+            puts rdio_response["response"]["artist"]["foreign_ids"][0]["foreign_id"].gsub('rdio-US:artist:','')
+            artist.update!(rdio_id: rdio_response["response"]["artist"]["foreign_ids"][0]["foreign_id"].gsub('rdio-US:artist:',''))
+        else
+            puts "no response"
         end
         # Ensure that we don't hit our API rate limit, 20 calls per minute max.
         sleep(4)
