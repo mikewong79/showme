@@ -96,7 +96,7 @@ namespace :songkick do
   task new_rdio_id: :environment do
     # Find all artists that created in the past hour
     # new_artists = Artist.where("created_at > ?", Time.now-3600)
-    non_updated_artists = Artist.where("updated_at < ?", Time.now-38800).limit(300)
+    non_updated_artists = Artist.where("updated_at < ?", Time.now-48800).limit(300)
     non_updated_artists.each do |new_artist|
         if !new_artist.rdio_id
             response = HTTParty.get('http://developer.echonest.com/api/v4/artist/profile?api_key=' + ENV['ECHONEST_API_KEY'] + '&format=json&id=songkick:artist:' + new_artist.songkick_id.to_s + '&bucket=id:rdio-US')
