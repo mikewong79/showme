@@ -101,9 +101,12 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 .white{
 	color:white;
 }
+.pacifico{
+	font-family: $font-primary;
+}
 
 .underline {
-	border-bottom:1px solid white;
+	border-bottom:1px solid #008cba;
 	padding-bottom:3px;
 }
 
@@ -111,9 +114,24 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     padding: 20px 40px 0px 40px;
 }
 
+.center{
+	text-align:center;
+}
 
+.nudge {
+	padding-bottom:5px;
+	display:block;
+}
 
+.top-bar2 {
+	background-color:black;
+}
 
+.top-bar-section li:not(.has-form) a:not(.button) {
+    padding: 0 20px;
+    line-height: 60px;
+    background: #000;
+  }
 
 
 

@@ -9,7 +9,7 @@
       <div class="underline">
         <h3 class="headline">Venue Address</h3>
       </div>
-      <div class="padding large-centered">
+      <div class="padding center">
         <p><%= @venue.name %></p>
         <p><%= @venue.street_address_1 %></p>
         <p><%= @venue.city %>, <%= @venue.state %> </p><p><%= @venue.zip %></p>
@@ -26,9 +26,11 @@
   <div class="clearfix"></div>
   <% @venue.performances.each do |p| %>
   <div class="row padding">
-    <div class="large-4 columns">
-      <%= link_to p.name, performance_path(p) %>
 
+    <div class="large-4 columns">
+    <p class="white pacifico underline">Performance Name</p>
+     <p> <%= link_to p.name, performance_path(p) %>
+      </p>
       <% if p.time == nil %>
       <p class="white">
         <span class="underline">Performance Date</span></br>
@@ -48,8 +50,9 @@
     </div>
 
       <div class="large-8 columns white">
+      <p class="white pacifico underline">Artists</p>
         <% p.artists.each do |a| %>
-        <%= a.name %></br>
+       <span class="nudge"> <%= a.name %></span>
         <% end %>
       </div>
     </div>
