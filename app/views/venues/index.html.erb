@@ -2,6 +2,9 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsrce8xS9a6NSyqRQBhP-TmGBQGSCL_aE&sensor=true"></script>
 
+<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
+
+
 <div id="map-container">
   <div id="map-canvas" ></div>
 </div>
@@ -9,14 +12,50 @@
 
 <script type="text/javascript">
 function initialize() {
-  var myLatLng = new google.maps.LatLng(<%= @venues.last.lat%>, <%=@venues.last.lng%>); // we set this as a var because we're going to reuse it for center/marker position -- you can elect to create separate google.maps.LatLng objects
-
+  var myLatLng = new google.maps.LatLng(-34.0128358, -118.495338); // we set this as a var because we're going to reuse it for center/marker position -- you can elect to create separate google.maps.LatLng objects
+  var showMeMarker;
   var mapOptions = {
     center: myLatLng, // see above
     zoom: 16 // arbitrary; you can zoom at whichever level you like
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions); // rendering a map in a div with the id of "map-canvas" and the options specified above in mapOptions
+
+  // Try W3C Geolocation (Preferred)
+  if(navigator.geolocation) {
+    browserSupportFlag = true;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      myLatLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      map.setCenter(myLatLng);
+      showMeMarker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      });
+
+    }, function() {
+      handleNoGeolocation(browserSupportFlag);
+    });
+  }
+  // Browser doesn't support Geolocation
+  else {
+    browserSupportFlag = false;
+    handleNoGeolocation(browserSupportFlag);
+  }
+
+  function handleNoGeolocation(errorFlag) {
+    if (errorFlag == true) {
+      alert("Geolocation service failed.");
+      
+    } else {
+      alert("Your browser doesn't support geolocation. We've placed you at beautiful GA");
+    
+    }
+    map.setCenter(myLatLng);
+    showMeMarker = new google.maps.Marker({
+      position: myLatLng,
+      map: map
+    });
+  }
 
   getVenues(); // calls getSpots function
 
@@ -40,28 +79,51 @@ function initialize() {
 
   };
 
-  var showMeMarker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    icon: iconMarker
-  });
-
   function mapVenues(venue_data) {
 
     // for loop to place each marker with info from the JSON
 
-    var i, newMarker;
+    var i, newMarker, thisVenue;
 
     for (i=0; i < venue_data.length; i++) {
       newMarker = new google.maps.Marker({
         position: new google.maps.LatLng(venue_data[i].lat, venue_data[i].lng), // sets the LatLng of each spot
         map: map, 
         title: (venue_data[i].name),
-        icon: iconMarker
+        icon: iconMarker,
       });
+    
+      thisVenue = (venue_data[i].name)
+      google.maps.event.addListener(newMarker, 'click', function(thisVenue) {
+        var boxText = document.createElement("div");
+                boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: red; padding: 5px;";
+                console.log(thisVenue);
+                boxText.innerHTML = thisVenue;
+            
+          var myOptions = {
+             content: boxText
+            ,disableAutoPan: false
+            ,maxWidth: 0
+            ,pixelOffset: new google.maps.Size(-140, 0)
+            ,zIndex: null
+            ,boxStyle: { 
+              opacity: 0.75
+              ,width: "280px"
+             }
+            ,closeBoxMargin: "10px 2px 2px 2px"
+            ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+            ,infoBoxClearance: new google.maps.Size(1, 1)
+            ,isHidden: false
+            ,pane: "floatPane"
+            ,enableEventPropagation: false
+          };
+
+          var ib = new InfoBox(myOptions);
+          ib.open(map, this);
+           });
     };
   }
-
+  
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
