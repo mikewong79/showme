@@ -1,36 +1,7 @@
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsrce8xS9a6NSyqRQBhP-TmGBQGSCL_aE&sensor=true"></script>
+<h1>Venues#index</h1>
+<p>Find me in app/views/venues/index.html.erb</p>
+<% @venues.each do |v| %>
+<p><%=link_to v.name, venue_path(v) %><%= link_to 'Add a performance', new_venue_performance_path(v) %> </p>
+<%end%>
+<%= link_to 'Add your venue', new_venue_path %> </p>
 
-<div id="map-container"> 
-  <div id="map-canvas" ></div>
-</div>
-
-
-<script type="text/javascript">
-  function initialize() {
-    var myLatLng = new google.maps.LatLng(34.0123019, -118.494921); // we set this as a var because we're going to reuse it for center/marker position -- you can elect to create separate google.maps.LatLng objects 
-
-    var mapOptions = {
-      center: myLatLng, // see above
-      zoom: 16 // arbitrary; you can zoom at whichever level you like
-    };
-    var map = new google.maps.Map(document.getElementById("map-canvas"),
-        mapOptions); // rendering a map in a div with the id of "map-canvas" and the options specified above in mapOptions
-
-    var iconMarker = {
-      url:'assets/Map_Icon.png',
-      scaledSize: new google.maps.Size(32,32),
-      size: new google.maps.Size(64, 64)
-      
-    };
-
-    var showMeMarker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      icon: iconMarker
-    }); 
-  }
-
-  google.maps.event.addDomListener(window, 'load', initialize);
-
-
-</script>

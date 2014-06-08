@@ -6,14 +6,20 @@ gem 'rails', '4.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-#HEROKU SHITSHOW DEPLOY
+# Heroku deploy
 gem 'rails_12factor'
 
+# Used in rake task
+gem 'httparty'
+
+#Active Model Serializer JSON
+gem "active_model_serializers"
 
 # Use PaperClip for uploading Photos!
 gem 'aws-sdk'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-# Use SCSS for stylesheets
+
+# Use SCSS and foundation for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 gem 'foundation-rails'
 
@@ -30,11 +36,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-# gem 'turbolinks'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
 
 # Devise gem four authentication
 gem 'devise'
@@ -44,7 +46,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-
+# Use rpsec and shoulda for TDD
 group :test, :development do
   gem 'rspec-rails'
   gem 'shoulda-matchers'

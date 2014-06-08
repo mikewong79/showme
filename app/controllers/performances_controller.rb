@@ -1,11 +1,13 @@
 class PerformancesController < ApplicationController
   before_action :set_performance, only:[:show, :edit, :update, :destroy]
-
+  respond_to :json, :html
   def index
     @performances = Performance.all
+    respond_with @performances
   end
 
   def show
+    respond_with @performance
   end
 
   def new
@@ -22,24 +24,36 @@ class PerformancesController < ApplicationController
   def create
     @performance = Performance.new(performance_params)
     if @performance.save
-      redirect_to venue_path(params[:venue_id])
+      respond_to do |format|
+        format.html {redirect_to venue_path(params[:venue_id])}
+        format.json {render json: @performance, status: :created}
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html {render :new}
+        format.json {render json: @performance.errors, status: :unprocessable_entity}
+      end
     end
   end
 
   def update
     if @performance.update(performance_params)
-      redirect_to venue_path(@performance.venue)
+      respond_to do |format|
+        format.html {redirect_to venue_path(@performance.venue)}
+        format.json {render nothing: true, status: :no_content}
+      end
     else
-      render :edit
+      format.html { render :edit }
+      format.json { render json: @perfomance.errors, status: :unprocessable_entity}
     end
   end
 
   def destroy
     venue = @performance.venue
     @performance.destroy
-    redirect_to venue_path(venue)
+    format.html { redirect_to venue_path(venue) }
+    format.json { render json: { head: ok } }
+    
   end
 
   protected
@@ -49,7 +63,7 @@ class PerformancesController < ApplicationController
   end
 
   def performance_params
-    params.require(:performance).permit(:name, :date, :time, :description, :venue_id, :artist_ids => [])
+    params.require(:performance).permit(:name, :date, :time, :description, :venue_id, :songkick_id, :artist_ids => [])
   end
 
 end

@@ -1,28 +1,49 @@
 class VenuesController < ApplicationController
 
   before_action :set_venue, only:[:show, :edit, :update, :destroy]
+  respond_to :json, :html
 
   def map
-    @venues = Venue.all
-  end
-
-  def index
     @venues = current_owner.venues
   end
 
+  def index
+
+    @venues = Venue.all
+    respond_with @venues
+    if signed_in?
+      @venues = current_owner.venues
+    else
+      redirect_to new_owner_session_path
+    end
+
+  end
+
   def show
+    respond_with @venue
   end
 
   def new
-    @venue = Venue.new
+    if signed_in?
+      @venue = Venue.new
+    else
+      redirect_to new_owner_session_path
+    end
+
   end
 
   def create
     @venue = Venue.new(venue_params)
     if @venue.save
-      redirect_to venues_path
+      respond_to do |format|
+      format.html {redirect_to venues_path}
+      format.json {render json: @venue, status: :created}
+      end
     else
-      render :new
+      respond_to do |format|
+      format.html {render :new}
+      format.json {render json: @venue.errors, status: :unprocessable_entity}
+      end
     end
   end
 
@@ -31,15 +52,20 @@ class VenuesController < ApplicationController
 
   def update
     if @venue.update(venue_params)
-      redirect_to venues_path
+        respond_to do |format|
+        format.html {redirect_to venues_path}
+        format.json {render nothing: true, status: :no_content}
+      end
     else
-      render :edit
+      format.html { render :edit}
+      format.json { render json: @venue.errors, status: :unprocessable_entity}
     end
   end
 
   def destroy
     @venue.destroy
-    redirect_to venues_path
+    format.html { redirect_to venues_path }
+    format.json { render json: { head: ok } }
   end
 
 
@@ -50,7 +76,7 @@ class VenuesController < ApplicationController
   end
 
   def venue_params
-    params.require(:venue).permit(:name, :street_address_1, :city, :state, :zip, :phone, :website, :owner_id, :photo)
+    params.require(:venue).permit(:name, :street_address_1, :city, :state, :zip, :phone, :website, :owner_id, :photo, :lat, :lng, :songkick_id)
   end
 
 end

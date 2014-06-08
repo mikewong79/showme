@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603003102) do
+ActiveRecord::Schema.define(version: 20140607210056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,11 @@ ActiveRecord::Schema.define(version: 20140603003102) do
   create_table "artists", force: true do |t|
     t.string   "name"
     t.string   "genre"
-    t.integer  "performance_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "songkick_id"
+    t.string   "rdio_id"
   end
-
-  add_index "artists", ["performance_id"], name: "index_artists_on_performance_id", using: :btree
 
   create_table "artists_performances", id: false, force: true do |t|
     t.integer "performance_id", null: false
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140603003102) do
     t.integer  "venue_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "songkick_id"
   end
 
   add_index "performances", ["venue_id"], name: "index_performances_on_venue_id", using: :btree
@@ -80,6 +80,9 @@ ActiveRecord::Schema.define(version: 20140603003102) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "songkick_id"
+    t.float    "lat"
+    t.float    "lng"
   end
 
   add_index "venues", ["owner_id"], name: "index_venues_on_owner_id", using: :btree
