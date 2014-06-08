@@ -41,14 +41,13 @@ $(document).ready(function() {
 
   // set up the controls
   $('#play').click(function() {
-    apiswf.rdio_play($('#play_key').val());
+    apiswf.rdio_play('a2267000');
   });
   $('#stop').click(function() { apiswf.rdio_stop(); });
   $('#pause').click(function() { apiswf.rdio_pause(); });
   $('#previous').click(function() { apiswf.rdio_previous(); });
   $('#next').click(function() { apiswf.rdio_next(); });
 });
-
 
 // the global callback object
 var callback_object = {};

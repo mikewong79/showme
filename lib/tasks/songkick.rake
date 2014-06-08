@@ -111,7 +111,7 @@ namespace :songkick do
                 new_artist.update!(rdio_id: "done")
             end
             # # Ensure that we don't hit our API rate limit, 20 calls per minute max.
-            sleep(4)
+            sleep(3.1)
         else
             puts "rdio id exists"
         end
@@ -134,7 +134,24 @@ namespace :songkick do
             puts "no response"
         end
         # Ensure that we don't hit our API rate limit, 20 calls per minute max.
-        sleep(4)
+        sleep(3.1)
+    end
+  end
+
+  desc "Go to rdio, give them artist key, get back album key and embedded url"
+  task rdio_album: :environment do
+    client = RdioApi.new(:consumer_key => ENV['RDIO_CONSUMER_KEY'], :consumer_secret => ENV['RDIO_CONSUMER_SECRET'])
+    album_artists = Artist.where.not(rdio_id: "done")
+    album_artists.each do |album_artist|
+        response = client.getTracksForArtist(:artist => album_artist.rdio_id)
+        if response.count > 0
+            album_key = response.first["albumKey"]
+            embed_url = response.first["embedUrl"]
+            album_artist.update!(album_key: album_key, embed_url: embed_url)
+        else
+            puts "no response from rdio"
+        end
+        sleep(0.11)
     end
   end
 end

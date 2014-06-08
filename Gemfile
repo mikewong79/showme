@@ -36,7 +36,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-
+# Gem to get rdio artist info.
+gem 'rdio_api'
+gem 'multi_json', '~> 1.3'
 
 # Devise gem four authentication
 gem 'devise'

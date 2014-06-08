@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
 <!-- <div class="contain-to-grid sticky"> -->
       <nav class="top-bar" data-topbar data-options="sticky_on: large">
       <ul class="title-area">
@@ -11,6 +14,17 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
+            <li>
+              <div id="apiswf"></div>
+                <span class="rdio-player">
+                  <span id="artist"></span> - <span id="track"></span>
+                  <button id="play" class="btn btn-default"><i class="fa fa-play-circle"></i></button>
+                  <button id="stop" class="btn btn-default"><i class="fa fa-stop"></i></button>
+                  <button id="pause" class="btn btn-default"><i class="fa fa-pause"></i></button>
+                  <button id="previous" class="btn btn-default"><i class="fa fa-step-backward"></i></button>
+                  <button id="next" class="btn btn-default"><i class="fa fa-step-forward"></i></button>
+                </span>
+              </li>
             <% if !signed_in? %>
               <li class="active"><a href="/owners/sign_up">SIGNUP</a></li>
               <li class="active"><a href="/owners/sign_in">LOGIN</a></li>
