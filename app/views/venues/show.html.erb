@@ -1,34 +1,43 @@
-<h1>Venues#show</h1>
-<p>Find me in app/views/venues/show.html.erb</p>
-
 <div class="row">
-	<div class="small-4 columns">
+
+	<!-- <div class="large-4 columns black venueaddress">
     Venue Photo Div
     <%= image_tag source=@venue.photo %>
-  </div>
-	<div class="small-8 columns">
-  <%= @venue.name %><br />
-  <%= @venue.street_address_1 %><br />
-  <%= @venue.city %>, <%= @venue.state %> <%= @venue.zip %>
+  </div> -->
+  <div class="large-12 columns black venueaddress">
+
+    <div class="small-12 columns headline">
+      Venue Address
+    </div>
+
+    <p><%= @venue.name %></p>
+    <p><%= @venue.street_address_1 %></p>
+    <p><%= @venue.city %>, <%= @venue.state %> </p><p><%= @venue.zip %></p>
   </div>
 
 </div>
-<div class="row">
-	<div class="small-12 columns">
-    Upcoming Events<br/>
-    <% @venue.performances.each do |p| %>
-    <%= link_to p.name, performance_path(p) %><br/>
-    <%= p.date %>@<%=p.time%><br/>
-
-      <% p.artists.each do |a| %>
-      <%= a.name %><br/>
-      <% end %>
-    <% end %>
+<div class="row black">
+	<div class="small-12 columns headline">
+    Upcoming Events
   </div>
+
+  <% @venue.performances.each do |p| %>
+
+  <div class="large-4 columns">
+    <%= link_to p.name, performance_path(p) %>
+    <p class="white"><%= p.date %>@<%=p.time%></p>
+  </div>
+
+  <div class="large-8 columns white">
+    <% p.artists.each do |a| %>
+    <%= a.name %>
+  <% end %>
+  </div>
+  <% end %>
 </div>
-<div class="row">
+<!-- <div class="row">
 	<div class="small-12 columns">PLAYLIST</div>
 </div>
 <%= link_to 'Add a performance', new_venue_performance_path(params[:id]) %>
 <%= link_to 'Edit This Venue', edit_venue_path(params[:id]) %>
-<%= link_to 'Delete This Venue', @venue, {method: :delete, data: {confirm: "Are you sure you want to delete this venue?"}} %>
+<%= link_to 'Delete This Venue', @venue, {method: :delete, data: {confirm: "Are you sure you want to delete this venue?"}} %> -->
