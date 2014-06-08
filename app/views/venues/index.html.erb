@@ -11,6 +11,19 @@
 
 
 <script type="text/javascript">
+// function getPerformances() {  // GETs all Performances from the JSON API
+
+//     $.ajax ({
+//       type: "GET",
+//       dataType: "json",
+//       url: "http://localhost:3000/venues/1/performances.json"   // this is our own JSON from jbuilder!
+//     }).done(function(data){
+//         performancesData = data
+//     });
+//   }
+
+// getPerformances();
+
 function initialize() {
   var myLatLng = new google.maps.LatLng(-34.0128358, -118.495338); // we set this as a var because we're going to reuse it for center/marker position -- you can elect to create separate google.maps.LatLng objects
   var showMeMarker;
@@ -45,10 +58,10 @@ function initialize() {
   function handleNoGeolocation(errorFlag) {
     if (errorFlag == true) {
       alert("Geolocation service failed.");
-      
+
     } else {
       alert("Your browser doesn't support geolocation. We've placed you at beautiful GA");
-    
+
     }
     map.setCenter(myLatLng);
     showMeMarker = new google.maps.Marker({
@@ -57,14 +70,14 @@ function initialize() {
     });
   }
 
-  getVenues(); // calls getSpots function
+  getVenues(); // calls getVenues function
 
   function getVenues() {  // GETs all Venues spots from the JSON API
 
     $.ajax ({
-      type: "GET", 
-      dataType: "json", 
-      url: "http://localhost:3000/venues.json"   // this is our own JSON from jbuilder!         
+      type: "GET",
+      dataType: "json",
+      url: "http://localhost:3000/venues.json"   // this is our own JSON from jbuilder!
     }).done(function(data){
         mapVenues(data);// calling the mapSpots function on this data
     });
@@ -85,45 +98,72 @@ function initialize() {
 
     var i, newMarker, thisVenue;
 
+
     for (i=0; i < venue_data.length; i++) {
+      thisVenue = venue_data[i];
+      if (thisVenue.performances.length > 0) {
+        console.log(thisVenue.performances[0].artists)
+      }
       newMarker = new google.maps.Marker({
         position: new google.maps.LatLng(venue_data[i].lat, venue_data[i].lng), // sets the LatLng of each spot
-        map: map, 
+        map: map,
         title: (venue_data[i].name),
         icon: iconMarker,
       });
-    
-      thisVenue = (venue_data[i].name)
-      google.maps.event.addListener(newMarker, 'click', function(thisVenue) {
-        var boxText = document.createElement("div");
-                boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: red; padding: 5px;";
-                console.log(thisVenue);
-                boxText.innerHTML = thisVenue;
-            
-          var myOptions = {
-             content: boxText
-            ,disableAutoPan: false
-            ,maxWidth: 0
-            ,pixelOffset: new google.maps.Size(-140, 0)
-            ,zIndex: null
-            ,boxStyle: { 
-              opacity: 0.75
-              ,width: "280px"
-             }
-            ,closeBoxMargin: "10px 2px 2px 2px"
-            ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-            ,infoBoxClearance: new google.maps.Size(1, 1)
-            ,isHidden: false
-            ,pane: "floatPane"
-            ,enableEventPropagation: false
-          };
+      newMarker.info = new google.maps.InfoWindow({
+        content: '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">'+thisVenue.name+'</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+      'sandstone rock formation in the southern part of the '+
+      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+      'south west of the nearest large town, Alice Springs; 450&#160;km '+
+      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+      'Aboriginal people of the area. It has many springs, waterholes, '+
+      'rock caves and ancient paintings. Uluru is listed as a World '+
+      'Heritage Site.</p>'+
+      '<p>Attribution: Uluru, <a href="http://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+      'http://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+      '(last visited June 22, 2009).</p>'+
+      '</div>'+
+      '</div>'
+      });
+      google.maps.event.addListener(newMarker, 'click', function() {
+        this.info.open(map,this)
+      });
 
-          var ib = new InfoBox(myOptions);
-          ib.open(map, this);
-           });
+      // google.maps.event.addListener(newMarker, 'click', function() {
+      //   var boxText = document.createElement("div");
+      //   boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: red; padding: 5px;";
+      //   boxText.innerHTML = thisVenue.name;
+
+      //   var myOptions = {
+      //      content: boxText
+      //     ,disableAutoPan: false
+      //     ,maxWidth: 0
+      //     ,pixelOffset: new google.maps.Size(-140, 0)
+      //     ,zIndex: null
+      //     ,boxStyle: {
+      //       opacity: 0.75
+      //       ,width: "280px"
+      //      }
+      //     ,closeBoxMargin: "10px 2px 2px 2px"
+      //     ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+      //     ,infoBoxClearance: new google.maps.Size(1, 1)
+      //     ,isHidden: false
+      //     ,pane: "floatPane"
+      //     ,enableEventPropagation: false
+      //   };
+
+      //   var ib = new InfoBox(myOptions);
+      //   ib.open(map, this);
+      // });
     };
   }
-  
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
