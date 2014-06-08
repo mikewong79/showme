@@ -5,36 +5,58 @@
     <%= image_tag source=@venue.photo %>
   </div> -->
   <div class="large-12 columns black venueaddress">
-
-    <div class="small-12 columns headline">
-      Venue Address
+    <div class="row black-bg">
+      <div class="underline">
+        <h3 class="headline">Venue Address</h3>
+      </div>
+      <div class="padding large-centered">
+        <p><%= @venue.name %></p>
+        <p><%= @venue.street_address_1 %></p>
+        <p><%= @venue.city %>, <%= @venue.state %> </p><p><%= @venue.zip %></p>
+      </div>
     </div>
-
-    <p><%= @venue.name %></p>
-    <p><%= @venue.street_address_1 %></p>
-    <p><%= @venue.city %>, <%= @venue.state %> </p><p><%= @venue.zip %></p>
   </div>
 
 </div>
 <div class="row black">
-	<div class="small-12 columns headline">
-    Upcoming Events
+  <div class="row black-bg">
+   <div class="small-12 columns  underline">
+    <h3 class="headline">Upcoming Events</h3>
   </div>
-
+  <div class="clearfix"></div>
   <% @venue.performances.each do |p| %>
+  <div class="row padding">
+    <div class="large-4 columns">
+      <%= link_to p.name, performance_path(p) %>
 
-  <div class="large-4 columns">
-    <%= link_to p.name, performance_path(p) %>
-    <p class="white"><%= p.date %>@<%=p.time%></p>
-  </div>
+      <% if p.time == nil %>
+      <p class="white">
+        <span class="underline">Performance Date</span></br>
+        <%= p.date.strftime("%m/%d/%Y") %>
+      </p>
+      <% else %>
+      <p class="white"> 
+        <span class="underline">Performance Date</span></br>
+          <%= p.date.strftime("%m/%d/%Y") %></br>
+        <span class="underline">Performance Starts</span> </br>
+          <%= 
+          time = Time.parse(p.time.to_s)
+          time.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M%p")
+          %>
+      </p>
+      <% end %>
+    </div>
 
-  <div class="large-8 columns white">
-    <% p.artists.each do |a| %>
-    <%= a.name %>
-  <% end %>
+      <div class="large-8 columns white">
+        <% p.artists.each do |a| %>
+        <%= a.name %></br>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
   </div>
-  <% end %>
 </div>
+
 <!-- <div class="row">
 	<div class="small-12 columns">PLAYLIST</div>
 </div>
