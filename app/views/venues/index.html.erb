@@ -4,10 +4,15 @@
 
 <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
 
-
+<% if signed_in? %>
+<div id="map-container" style="top:120px;">
+  <div id="map-canvas" ></div>
+</div>
+<% else %>
 <div id="map-container">
   <div id="map-canvas" ></div>
 </div>
+<% end %>
 
 
 <script type="text/javascript">
