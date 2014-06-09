@@ -123,14 +123,21 @@ function initialize() {
       });
 
       newMarker.info = new google.maps.InfoWindow({
-        content: '<div id="content">'+
+        content: '<div class="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">'+thisVenue.name+'</h1>'+
+      '<h3 class="pacifico">'+thisVenue.name+'</h3>'+
+      '<h4 class="info-h4">'+thisVenue.street_address_1+'</h4>'+
+      '<h4 class="info-h4">'+thisVenue.city+'</h4>'+
+      '<h4 class="info-h4">'+thisVenue.state+'</h4>'+
+      '<h4 class="info-h4">'+thisVenue.zip+'</h4>'+
       '<div id="bodyContent">'+
       '<a id="myLink" title="Click to do something" href="#" onclick="MyFunction(thisAlbumKey);return false;">'+thisArtist+'</a>'+
+      '<a id="myLink" class="right" title="Click to do something" href=venues/' + thisVenue.id + '>'+"View Venue"+'</a>'+
       '</div>'+
       '</div>'
+
+      
 
       });
 
