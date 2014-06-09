@@ -9,6 +9,7 @@ html, body {
 	height: 100%;
 	margin:0px;
 	padding:0px;
+	background-color: black;
 
  }
 
@@ -143,7 +144,10 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 
 }
 
-
+.info-h4 {
+	font-size:14pt;
+	margin-bottom:0px;
+}
 
 
 
