@@ -121,6 +121,7 @@ function initialize() {
         title: (venue_data[i].name),
         icon: iconMarker,
       });
+
       newMarker.info = new google.maps.InfoWindow({
         content: '<div id="content">'+
       '<div id="siteNotice">'+
@@ -169,7 +170,7 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 var MyFunction = function(album_key) {
-        apiswf.rdio_play(album_key);
+        apiswf.rdio_play("t2910908");
       };
 
 </script>
