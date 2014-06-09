@@ -11,11 +11,11 @@ class VenuesController < ApplicationController
 
     @venues = Venue.all
     respond_with @venues
-    if signed_in?
-      @venues = current_owner.venues
-    else
-      redirect_to new_owner_session_path
-    end
+    # if signed_in?
+    #   @venues = current_owner.venues
+    # else
+    #   redirect_to new_owner_session_path
+    # end
 
   end
 

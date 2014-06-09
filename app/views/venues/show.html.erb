@@ -1,34 +1,68 @@
-<h1>Venues#show</h1>
-<p>Find me in app/views/venues/show.html.erb</p>
-
 <div class="row">
-	<div class="small-4 columns">
+
+	<!-- <div class="large-4 columns black venueaddress">
     Venue Photo Div
     <%= image_tag source=@venue.photo %>
-  </div>
-	<div class="small-8 columns">
-  <%= @venue.name %><br />
-  <%= @venue.street_address_1 %><br />
-  <%= @venue.city %>, <%= @venue.state %> <%= @venue.zip %>
+  </div> -->
+  <div class="large-12 columns black venueaddress">
+    <div class="row black-bg">
+      <div class="underline">
+        <h3 class="headline">Venue Address</h3>
+      </div>
+      <div class="padding center">
+        <p><%= @venue.name %></p>
+        <p><%= @venue.street_address_1 %></p>
+        <p><%= @venue.city %>, <%= @venue.state %> </p><p><%= @venue.zip %></p>
+      </div>
+    </div>
   </div>
 
 </div>
-<div class="row">
-	<div class="small-12 columns">
-    Upcoming Events<br/>
-    <% @venue.performances.each do |p| %>
-    <%= link_to p.name, performance_path(p) %><br/>
-    <%= p.date %>@<%=p.time%><br/>
+<div class="row black">
+  <div class="row black-bg">
+   <div class="small-12 columns  underline">
+    <h3 class="headline">Upcoming Events</h3>
+  </div>
+  <div class="clearfix"></div>
+  <% @venue.performances.each do |p| %>
+  <div class="row padding">
 
-      <% p.artists.each do |a| %>
-      <%= a.name %><br/>
+    <div class="large-4 columns">
+    <p class="white pacifico underline">Performance Name</p>
+     <p> <%= link_to p.name, performance_path(p) %>
+      </p>
+      <% if p.time == nil %>
+      <p class="white">
+        <span class="underline">Performance Date</span></br>
+        <%= p.date.strftime("%m/%d/%Y") %>
+      </p>
+      <% else %>
+      <p class="white"> 
+        <span class="underline">Performance Date</span></br>
+          <%= p.date.strftime("%m/%d/%Y") %></br>
+        <span class="underline">Performance Starts</span> </br>
+          <%= 
+          time = Time.parse(p.time.to_s)
+          time.in_time_zone("Pacific Time (US & Canada)").strftime("%I:%M%p")
+          %>
+      </p>
       <% end %>
+    </div>
+
+      <div class="large-8 columns white">
+      <p class="white pacifico underline">Artists</p>
+        <% p.artists.each do |a| %>
+       <span class="nudge"> <%= a.name %></span>
+        <% end %>
+      </div>
+    </div>
     <% end %>
   </div>
 </div>
-<div class="row">
+
+<!-- <div class="row">
 	<div class="small-12 columns">PLAYLIST</div>
 </div>
 <%= link_to 'Add a performance', new_venue_performance_path(params[:id]) %>
 <%= link_to 'Edit This Venue', edit_venue_path(params[:id]) %>
-<%= link_to 'Delete This Venue', @venue, {method: :delete, data: {confirm: "Are you sure you want to delete this venue?"}} %>
+<%= link_to 'Delete This Venue', @venue, {method: :delete, data: {confirm: "Are you sure you want to delete this venue?"}} %> -->
