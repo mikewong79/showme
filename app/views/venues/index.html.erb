@@ -107,7 +107,13 @@ function initialize() {
     for (i=0; i < venue_data.length; i++) {
       thisVenue = venue_data[i];
       if (thisVenue.performances.length > 0) {
-        console.log(thisVenue.performances[0].artists)
+        if (thisVenue.performances[0].artists.length > 0){
+          thisArtist = thisVenue.performances[0].artists[0].name
+          if (thisVenue.performances[0].artists[0].album_key) {
+            thisAlbumKey = thisVenue.performances[0].artists[0].album_key
+            console.log(thisAlbumKey)
+          }
+        }
       }
       newMarker = new google.maps.Marker({
         position: new google.maps.LatLng(venue_data[i].lat, venue_data[i].lng), // sets the LatLng of each spot
@@ -115,18 +121,19 @@ function initialize() {
         title: (venue_data[i].name),
         icon: iconMarker,
       });
+
       newMarker.info = new google.maps.InfoWindow({
         content: '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">'+thisVenue.name+'</h1>'+
       '<div id="bodyContent">'+
-      '<iframe src="https://rd.io/e/Rl4JIOIrUyYN2Q/" width="440" height="200">' +
-        '<p>Your browser does not support iframes.</p>' +
-      '</iframe>' +
+      '<a id="myLink" title="Click to do something" href="#" onclick="MyFunction(thisAlbumKey);return false;">'+thisArtist+'</a>'+
       '</div>'+
       '</div>'
+
       });
+
       google.maps.event.addListener(newMarker, 'click', function() {
         this.info.open(map,this)
       });
@@ -162,6 +169,8 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
+var MyFunction = function(album_key) {
+        apiswf.rdio_play("t2910908");
+      };
 
 </script>

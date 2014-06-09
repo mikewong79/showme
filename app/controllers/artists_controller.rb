@@ -48,7 +48,7 @@ class ArtistsController < ApplicationController
   end
 
   def artist_params
-    params.require(:artist).permit(:name, :genre, :songkick_id)
+    params.require(:artist).permit(:name, :genre, :songkick_id, :album_key, :rdio_id, :embed_url)
   end
 end
 
